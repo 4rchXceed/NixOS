@@ -1,0 +1,170 @@
+/**
+ * rofi -dump-theme output.
+ * Rofi version: 1.7.8+wayland1-dev
+ **/
+* {
+  text: #86cecb;
+  sectext: black;
+  borders: #137a7f;
+  mainbg: #373b3e;
+  secbg: #bec8d1;
+  other: #e12885;
+  winbg: #60c4c0;
+  lstbborder: #93c2c0;
+}
+
+element {
+    padding: 10px;
+    cursor:  pointer;
+    spacing: 15px;
+    border:  3px;
+    border-color: var(borders);
+    border-radius: 20px;
+}
+element normal.normal {
+    background-color: var(borders);
+    text-color:       var(sectext);
+}
+element normal.urgent {
+    background-color: var(other);
+    text-color:       var(text);
+}
+element normal.active {
+    background-color: var(secbg);
+    text-color:       var(sectext);
+}
+element selected.normal {
+    background-color: var(text);
+    text-color:       var(mainbg);
+}
+element selected.urgent {
+    background-color: var(text);
+    text-color:       var(mainbg);
+}
+element selected.active {
+    background-color: var(text);
+    text-color:       var(mainbg);
+}
+element alternate.normal {
+    background-color: var(borders);
+    text-color:       var(sectext);
+}
+element alternate.urgent {
+    background-color: var(other);
+    text-color:       var(text);
+}
+element alternate.active {
+    background-color: var(secbg);
+    text-color:       var(sectext);
+}
+element-text {
+    vertical-align: 0.5;
+    background-color: transparent;
+    cursor:           inherit;
+    highlight:        inherit;
+    text-color:       inherit;
+}
+element-icon {
+    background-color: black;
+    padding: 5px;
+    border-radius: 20px;
+    size:             2.0000em ;
+    cursor:           inherit;
+    text-color:       inherit;
+}
+window {
+    padding:          5;
+    background-color: transparent;
+    border:           1;
+}
+mainbox {
+    background-color: transparent;
+    padding: 20;
+}
+message {
+    padding:     5px ;
+    border:      10px solid 0px 0px;
+    border-radius: 20px;
+}
+textbox {
+    padding:     20px;
+    border:      10px solid 0px 0px;
+    border-radius: 20px;
+    background-color: var(other);
+    text-color: white;
+}
+listview {
+    padding:      5px;
+    scrollbar:    false;
+    border-color: var(lstbborder);
+    background-color: var(winbg);
+    fixed-height: 0;
+    lines: 7;
+    border:       5px;
+    border-radius: 20px;
+}
+
+button {
+    cursor:     pointer;
+    spacing:    0;
+    text-color: var(sectext);
+}
+
+num-filtered-rows {
+    background-color: var(other);
+    expand:     false;
+    text-color: white;
+}
+num-rows {
+    background-color: var(other);
+    expand:     false;
+    text-color: white;
+}
+textbox-num-sep {
+    background-color: var(other);
+    expand:     false;
+    str:        "/";
+    text-color: white;
+}
+inputbar {
+    background-color: var(other);
+    padding:    20px;
+    background-color: var(other);
+    text-color: var(sectext);
+    children:   [ "prompt","textbox-prompt-colon","entry","overlay","num-filtered-rows","textbox-num-sep","num-rows","case-indicator" ];
+    text-color: white;
+    border-radius: 20px;
+}
+overlay {
+    text-color: white;
+    padding:          0px 0.2000em ;
+    background-color: var(other);
+    foreground-color: var(other);
+    margin:           0px 0.2000em ;
+}
+case-indicator {
+    text-color: white;
+    background-color: var(other);
+    spacing:    0;
+}
+entry {
+    background-color: var(other);
+    text-color:       white; 
+    cursor:            text;
+    spacing:           0;
+    placeholder-color: white;
+    placeholder:       "Search...";
+}
+prompt {
+    text-color: white;
+    background-color: var(other);
+    spacing:    0;
+}
+textbox-prompt-colon {
+    background-color: var(other);
+    text-color: white;
+    margin:     0px 0.3000em 0.0000em 0.0000em ;
+    expand:     false;
+    str:        ":";
+    text-color: inherit;
+}

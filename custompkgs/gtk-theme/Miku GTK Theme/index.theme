@@ -1,0 +1,11 @@
+[Desktop Entry]
+Type=X-GNOME-Metatheme
+Name=Miku GTK Theme
+Comment=Nothing here...
+Encoding=UTF-8
+
+[X-GNOME-Metatheme]
+Name=Miku GTK Theme
+GtkTheme=Miku GTK Theme
+IconTheme=Miku GTK Theme
+MetacityTheme=Miku GTK Theme

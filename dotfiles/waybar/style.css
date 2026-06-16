@@ -1,0 +1,103 @@
+* {
+    border: none;
+    border-radius: 0;
+    font-family: "Noto Monochrome Emoji";
+    font-weight: bold;
+    font-size: 16px;
+    padding: 0;
+    margin: 0;
+}
+
+window#waybar {
+    background: rgba(255, 255, 255, 0.05);
+}
+
+#clock,
+#window,
+#pulseaudio,
+#network,
+#battery,
+#custom-music,
+#custom-memory,
+#workspaces,
+#tray,
+#backlight,
+#custom-battery,
+#custom-power {
+   border: 3px solid rgba(255, 255, 255, 0.5);
+   padding: 3px 30px;
+   margin: 0 5px;
+   color: black;
+   border-radius: 50px;
+   background: #86cecb;
+   transition: .4s;
+}
+
+#clock:hover,
+#window:hover,
+#pulseaudio:hover,
+#network:hover,
+#battery:hover,
+#custom-music:hover,
+#custom-memory:hover,
+#workspaces:hover,
+#tray:hover,
+#backlight:hover,
+#custom-battery:hover,
+#custom-power:hover {
+   padding: 3px 40px;
+   margin-left: 7px;
+   margin-right: 7px;
+   border-radius: 0px 0px 10px 10px;
+}
+
+#custom-power {
+   font-size: 150%;
+}
+
+#window:hover {
+   padding: 3px 150px;
+}
+
+#custom-battery {
+margin-left: 0px;
+border-radius: 0px 50px 50px 0px;
+border-left: 0px;
+border-left: 3px solid rgba(255, 255, 255, 0.5);
+}
+
+#network {
+   border-radius: 50px 0px 0px 50px;
+   margin-right: 0px;
+   border-right: 0px;
+}
+
+#window {
+   border-radius: 0px 0px 50px 50px;
+   border: 3px solid rgba(255, 255, 255, 0.5);
+   padding: 3px 100px;
+}
+
+#clock {
+   border-top: 0px;
+   border-left: 0px;
+   border-radius: 0px 0px 50px 0px;
+   margin-left: 0px;
+}
+
+#pulseaudio {
+   border-radius: 0px 0px 0px 50px;
+   margin-right: 0px;
+}
+
+#pulseaudio.microphone, #battery {
+   border-radius: 0px 0px 0px 0px;
+   margin-left: 0px;
+   border-right: none;
+   border-left: none;
+   margin-right: 0px;
+}
+
+#battery {
+border-left: 3px solid rgba(255, 255, 255, 0.5);
+}

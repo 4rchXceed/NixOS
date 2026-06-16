@@ -1,0 +1,156 @@
+{
+    "layer": "top",
+    "position": "top",
+    "mod": "dock",
+    "exclusive": true,
+    "passthrough": false,
+    "gtk-layer-shell": true,
+    "height": 50,
+    "modules-left": [
+        "clock",
+        "custom/power",
+        "custom/music",
+        "tray"
+    ],
+    "modules-center": [
+        "hyprland/window"
+    ],
+    "modules-right": [
+        "network",
+        "battery",
+        "custom/battery",
+        "pulseaudio",
+        "pulseaudio#microphone"
+    ],
+    "custom/battery": {
+        "exec": "PROFILE=\"$(powerprofilesctl get)\";\necho '{ \"alt\": \"'$PROFILE'\", \"tooltip\": \"'$PROFILE'\" }'",
+        "format": "{icon}",
+        "interval": 1,
+        "format-icons": {
+            "power-saver": "⚡\uFE0E",
+            "balanced": "⚡\uFE0E⚡\uFE0E",
+            "performance": "⚡\uFE0E⚡\uFE0E⚡\uFE0E"
+        },
+        "on-click": "~/.config/waybar/scripts/update_perf_mode.sh",
+        "return-type": "json"
+    },
+    "custom/power": {
+	"format": "⏻",
+	"on-click": "wlogout --buttons-per-row 6 --margin-top 600 --margin-bottom 600 --primary-monitor 1"
+    },
+    "hyprland/workspaces": {
+        "format": "{icon}",
+        "on-roll-up": "hyprctl dispatch workspace e+1",
+        "on-scroll-down": "hyprctl dispatch workspace e-1",
+        "format-icons": {
+            "1": "1",
+            "2": "2",
+            "3": "3",
+            "4": "4",
+            "5": "5"
+        },
+        "persistent_workspaces": {
+            "*": 1
+        }
+    },
+    "clock": {
+	"format": "{:%Y-%m-%d %H:%M:%S}",
+	"interval": 1
+    },
+    "hyprland/window": {
+        "format": "{}"
+    },
+    "custom/music": {
+	"format": "{}",
+	"exec": "waybar-module-music",
+	"return-type": "json"
+    },
+    "memory": {
+        "interval": 30,
+         "format": "{}% 💾",
+         "max-length": 10
+    },
+    "tray": {
+        "icon-size": 18,
+        "spacing": 10
+    },
+
+    "backlight": {
+        "device": "intel_backlight",
+        "format": "{icon} {percent}%",
+        "format-icons": [
+            "☀︎",
+            "🔆\uFE0E",
+            "☀️\uFE0E"
+        ],
+        "on-scroll-up": "brightnessctl -q set 1%+",
+        "on-scroll-down": "brightnessctl -q set 1%-"
+    },
+    "battery": {
+        "states":  {
+            "good": 95,
+            "warning": 40,
+            "critical": 30
+        },
+        "format": "{icon} {capacity}%",
+        "format-charging": "🔋\uFE0E⚡\uFE0E {capacity}%",
+        "format-plugged": "🔌\uFE0E {capacity}%",
+        "format-alt": "{time} {icon}",
+        "format-icons": [
+            "▁",
+            "▃",
+            "▄",
+            "▅",
+            "▆",
+            "▇",
+        ]
+    },
+    "pulseaudio": {
+        "format": "{icon} {volume}%",
+        "tooltip": false,
+        "format-muted": "🔇 Muted",
+        "on-click": "pamixer -t",
+        "on-scroll-up": "pamixer -i 5",
+        "on-scroll-down": "pamixer -d 5",
+        "scroll-step": 100,
+        "format-icons": {
+            "headphone": "🎧\uFE0E",
+            "hands-free": "ᖰᖳ",
+            "headset": "🎧\uFE0E",
+            "phone": "📱\uFE0E",
+            "portable": "💻\uFE0E",
+            "car": "🚗\uFE0E",
+            "default": [
+                "🔊\uFE0E",
+                "🔊\uFE0E",
+                "🔊\uFE0E"
+            ]
+        }
+    },
+    "pulseaudio#microphone": {
+	"name": "microphone",
+        "format": "{format_source}",
+        "format-source": "🎤\uFE0E {volume}%",
+        "format-source-muted": "🔇\uFE0E Muted",
+        "on-click": "pamixer --default-source -t",
+        "on-scroll-up": "pamixer --default-source -i 5",
+        "on-scroll-down": "pamixer --default-source -d 5",
+        "scroll-step": 5
+    },
+    "network": {
+        "format-wifi": "ᯤ\uFE0E {signalStrength}%",
+        "format-ethernet": "{ipaddr}/{cidr}",
+        "tooltip-format": "{essid} via {gwaddr}",
+        "format-linked": "(No IP)",
+        "format-disconnected": "Disconnected ⚠",
+        "format-alt": "{ipaddr}/{cidr}"
+    },
+    "bluetooth": {
+        "format": " {status}",
+        "format-disabled": "", // an empty format will hide the module
+        "format-connected": " {num_connections}",
+        "tooltip-format": "{device_alias}",
+        "tooltip-format-connected": " {device_enumerate}",
+        "tooltip-format-enumerate-connected": "{device_alias}"
+    }
+}
