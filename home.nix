@@ -1,4 +1,9 @@
-{ config, pkgs, ... }:
+{
+  config,
+  pkgs,
+  vital-with-vst,
+  ...
+}:
 
 let
   dotfiles = "/etc/nixos/dotfiles";
@@ -43,6 +48,7 @@ in
       ryubing
       winboat
       drawio
+      prismlauncher
       # dotnet-sdk_10
       dotnet-sdk_11
       # Rice pkgs (maybe: move to another file)
@@ -77,7 +83,7 @@ in
       # MUSIIIIIC
       yabridge
       yabridgectl
-      vital
+      linvstmanager
     ]
   );
 

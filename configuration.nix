@@ -175,7 +175,7 @@
     # no need to redefine it in your config for now)
     #media-session.enable = true;
   };
-
+  programs.dconf.enable = true;
   # Enable touchpad support (enabled default in most desktopManager).
   # services.xserver.libinput.enable = true;
 
@@ -185,6 +185,14 @@
     stdenv.cc.cc
     openssl
     curl
+    # For LinVst3
+    gtk3
+    pango
+    atk
+    cairo
+    gdk-pixbuf
+    glib
+    gobject-introspection
   ];
 
   services.usbmuxd.enable = true;
@@ -253,6 +261,7 @@
     # Polkit
     libsForQt5.polkit-qt
     dnsmasq
+    gsettings-desktop-schemas
   ];
   environment.sessionVariables.NIXOS_OZONE_WL = "1";
 

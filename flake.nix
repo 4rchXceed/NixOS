@@ -29,6 +29,10 @@
     cyan-breeze-dark-icons = {
       url = "path:custompkgs/cyan-breeze-dark-icons-nix/";
     };
+
+    vital-with-vst = {
+      url = "path:custompkgs/vital/";
+    };
   };
   outputs =
     inputs@{
@@ -41,6 +45,7 @@
       miku-gtk-theme,
       miku-grub-theme,
       cyan-breeze-dark-icons,
+      vital-with-vst,
       ...
     }:
     let
@@ -50,9 +55,7 @@
       # unstable = import nixpkgs-unstable { inherit system; };
     in
     {
-
       nixosConfigurations.ArchXceed = nixpkgs.lib.nixosSystem {
-
         inherit system;
         specialArgs = {
           inherit inputs;
@@ -73,6 +76,7 @@
               imports = [
                 ./home.nix
               ];
+
               wayland.windowManager.hyprland = {
                 enable = true;
                 xwayland.enable = true;
@@ -92,7 +96,15 @@
                   name = "Cyan-Breeze-Dark-Icons";
                 };
               };
+              home.file.".vst3/Vital.vst3".source = "${
+                inputs.vital-with-vst.packages.${pkgs.system}.default
+              }/lib/vst3/Vital.vst3";
+              home.file.".vst/Vital.dll".source = "${
+                inputs.vital-with-vst.packages.${pkgs.system}.default
+              }/lib/vst/Vital.so";
+
             };
+
           }
 
           (
@@ -100,6 +112,8 @@
             {
               environment.systemPackages = [
                 inputs.waybar-module-music.packages.${pkgs.system}.waybar-module-music
+                # VSTs
+                vital-with-vst.packages.${pkgs.system}.default
               ];
             }
           )
