@@ -1,10 +1,10 @@
 {
   config,
   pkgs,
-  vital-with-vst,
+  inputs,
+  # pake-youtube-music,
   ...
 }:
-
 let
   dotfiles = "/etc/nixos/dotfiles";
   mkLink = path: config.lib.file.mkOutOfStoreSymlink path;
@@ -25,12 +25,16 @@ in
       btop
       cava
       nixfmt
+      # Proton <3
+      protonvpn-gui
+      proton-pass
+      protonmail-bridge-gui
+      # Email
+      thunderbird
       # Everyday apps
       discord
       vesktop
-      protonvpn-gui
       steam
-      vscodium
       obsidian
       blender
       oh-my-zsh
@@ -84,8 +88,30 @@ in
       yabridge
       yabridgectl
       linvstmanager
+      # Auto mgr
+      playerctl
+      vscode
+      obs-cmd
+      obs-studio-plugins.obs-websocket
+      pkgs.gcr
+      kdePackages.kdenlive
+      audacity
+      openrgb-with-all-plugins
+      qFlipper
+      qbittorrent
+      jetbrains.idea-oss
+      gimp-with-plugins
+      moonlight-qt
+      hyprshade
+      winbox
+      lsfg-vk
+      # Low-latency audio
+      (pkgs.callPackage ./custompkgs/thirdparty/pipeasio { })
+      floorp-bin
     ]
   );
+
+  services.protonmail-bridge.enable = true;
 
   services.dunst.enable = true;
   # services.hyprpaper = {
@@ -118,6 +144,12 @@ in
 
       alias nixrb="sudo nixos-rebuild switch --flake path:/etc/nixos#ArchXceed"
 
+      ZSH_CUSTOM=$HOME/.config/oh-my-zsh
+
+      mkdir -p $HOME/.config/oh-my-zsh
+
+      export WINE_BIN=$(dirname $(readlink $(which wine)))/.wine
+
       export PATH="$PATH:/home/archxceed/bin"
     '';
     oh-my-zsh = {
@@ -129,6 +161,18 @@ in
         "man"
       ];
     };
+    plugins = [
+      {
+        name = "zsh-nix-shell";
+        file = "nix-shell.plugin.zsh";
+        src = pkgs.fetchFromGitHub {
+          owner = "chisui";
+          repo = "zsh-nix-shell";
+          rev = "v0.8.0";
+          sha256 = "1lzrn0n4fxfcgg65v0qhnj7wnybybqzs4adz7xsrkgmcsr0ii8b7";
+        };
+      }
+    ];
   };
 
   xdg.configFile = {
@@ -150,6 +194,23 @@ in
     "kitty/kitty.conf".source = mkLink "${dotfiles}/kitty/kitty.conf";
   };
 
+  xdg.portal = {
+    enable = true;
+    extraPortals = with pkgs; [
+    ];
+    config = {
+      hyprland = {
+        default = [
+          "hyprland"
+          "gtk"
+        ];
+        "org.freedesktop.impl.portal.ScreenCast" = [
+          "gnome"
+        ];
+      };
+    };
+  };
+
   # Git
   programs.git = {
     enable = true;
@@ -161,6 +222,7 @@ in
       init.defaultBranch = "master";
       safe.directory = "/etc/nixos";
       credential.helper = "store";
+      core.autocrlf = true;
     };
   };
 
@@ -181,6 +243,10 @@ in
   home.file.".config/wlogout/icons/reboot.png".source = mkLink "${dotfiles}/icons/reboot.png";
   home.file.".config/wlogout/icons/shutdown.png".source = mkLink "${dotfiles}/icons/shutdown.png";
   home.file.".config/wlogout/icons/suspend.png".source = mkLink "${dotfiles}/icons/suspend.png";
+  # PipeASIO DLL
+  home.file.".local/lib/wine".source = mkLink "${
+    (pkgs.callPackage ./custompkgs/thirdparty/pipeasio { })
+  }/lib/wine";
   # Wine64
   home.file."bin/wine64".source = mkLink "/etc/profiles/per-user/archxceed/bin/wine"; # Clearly not the best way, but it'll prob' work
   # SDDM Wallpaper (not needed, because as root I use /etc/nixos)

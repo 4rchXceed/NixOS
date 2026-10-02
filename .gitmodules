@@ -1,0 +1,3 @@
+[submodule "dotfiles/custom-notification/VocaloidTTS"]
+	path = dotfiles/custom-notification/VocaloidTTS
+	url = git@github.com:4rchXceed/VocaloidTTS.git

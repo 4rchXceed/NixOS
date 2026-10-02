@@ -1,7 +1,3 @@
-# Edit this configuration file to define what should be installed on
-# your system.  Help is available in the configuration.nix(5) man page
-# and in the NixOS manual (accessible by running ‘nixos-help’).
-
 {
   config,
   pkgs,
@@ -16,8 +12,16 @@
     ./hardware-configuration.nix
     ./fonts.nix
     inputs.silentSDDM.nixosModules.default
+    ./custompkgs/musnix
   ];
 
+  services.hardware.openrgb = {
+    enable = true;
+    package = pkgs.openrgb-with-all-plugins;
+    server.port = 6742;
+  };
+
+  musnix.enable = true;
   services.logind.settings.Login.HandleLidSwitchExternalPower = "ignore";
   services.blueman.enable = true;
 
@@ -155,14 +159,12 @@
     rtkit.enable = true;
     pam = {
       services = {
-        kwallet = {
-          name = "kwallet";
-          enable = false;
-        };
       };
     };
     polkit.enable = true;
   };
+  security.pam.services.sddm.enableGnomeKeyring = true;
+  services.gnome.gnome-keyring.enable = true;
   services.pipewire = {
     enable = true;
     alsa.enable = true;
@@ -206,6 +208,7 @@
       "wheel"
       "docker"
       "libvirtd"
+      "audio"
     ];
     packages = with pkgs; [
       kdePackages.kate
@@ -262,8 +265,18 @@
     libsForQt5.polkit-qt
     dnsmasq
     gsettings-desktop-schemas
+    gst_all_1.gstreamer
+    gst_all_1.gst-plugins-base
+    gst_all_1.gst-plugins-good
+    gst_all_1.gst-plugins-bad
+    gst_all_1.gst-plugins-ugly
+    gst_all_1.gst-libav
+    gst_all_1.gst-vaapi
   ];
   environment.sessionVariables.NIXOS_OZONE_WL = "1";
+  environment.variables = {
+    GST_PLUGIN_PATH = "/run/current-system/sw/lib/gstreamer-1.0/";
+  };
 
   # Some programs need SUID wrappers, can be configured further or are
   # started in user sessions.
@@ -279,12 +292,17 @@
   services.openssh.enable = true;
   virtualisation.libvirtd = {
     enable = true;
+    firewallBackend = "iptables";
   };
   virtualisation.docker.enable = true;
   virtualisation.docker.enableOnBoot = true;
   virtualisation.vmware.host.enable = true;
   # Open ports in the firewall.
-  networking.firewall.allowedTCPPorts = [ 22 ];
+  networking.firewall.allowedTCPPorts = [
+    22
+    24444
+    25565
+  ];
   # networking.firewall.allowedUDPPorts = [ ... ];
   # Or disable the firewall altogether.
   # networking.firewall.enable = false;
