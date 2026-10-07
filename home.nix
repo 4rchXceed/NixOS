@@ -108,6 +108,8 @@ in
       # Low-latency audio
       (pkgs.callPackage ./custompkgs/thirdparty/pipeasio { })
       floorp-bin
+      nodejs # Required for copilot in nvim
+      rustfmt
     ]
   );
 
@@ -151,6 +153,13 @@ in
       export WINE_BIN=$(dirname $(readlink $(which wine)))/.wine
 
       export PATH="$PATH:/home/archxceed/bin"
+
+      editor() {
+        cd "$1"
+        nvim
+      }
+
+      alias nixedit="cd /etc/nixos && nvim"
     '';
     oh-my-zsh = {
       enable = true;

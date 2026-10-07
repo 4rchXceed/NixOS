@@ -2,7 +2,8 @@ source /etc/nixos/configs/neovim/plug.vim
 
 call plug#begin()
 
-Plug 'GrzegorzSzczepanek/gamify.nvim'
+Plug 'nvzone/volt'
+Plug 'gisketch/triforce.nvim'
 Plug 'neovim/nvim-lspconfig'
 Plug 'hrsh7th/cmp-nvim-lsp'
 Plug 'hrsh7th/cmp-buffer'
@@ -15,6 +16,9 @@ Plug 'romgrk/barbar.nvim'
 Plug 'scottmckendry/cyberdream.nvim'
 Plug 'nvim-lualine/lualine.nvim'
 Plug 'axsaucedo/neovim-power-mode'
+Plug 'airblade/vim-gitgutter'
+Plug 'github/copilot.vim'
+Plug 'bluz71/vim-moonfly-colors', { 'as': 'moonfly' }
 
 call plug#end()
 
@@ -40,7 +44,7 @@ set clipboard=unnamedplus   " using system clipboard
 filetype plugin on
 set cursorline              " highlight current cursorline
 set ttyfast                 " Speed up scrolling in Vim
-set noswapfile            " disable creating swap file
+set colorcolumn=
 
 autocmd VimEnter * if argc() == 0 && !exists("s:std_in") | NERDTree | endif
 
@@ -49,4 +53,9 @@ source /etc/nixos/configs/neovim/cmp.lua
 source /etc/nixos/configs/neovim/lsp.lua
 source /etc/nixos/configs/neovim/lualine.lua
 
-colorscheme cyberdream
+let NERDTreeMinimalUI=1
+
+let g:moonflyTransparent = v:true
+colorscheme moonfly
+
+GitGutterEnable

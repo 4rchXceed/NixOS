@@ -37,6 +37,7 @@ require('lualine').setup {
         component_separators = '',
         section_separators = { left = '', right = '' },
     },
+    colorscheme = "moonfly",
     sections = {
         lualine_a = { { 'mode', separator = { left = '' }, right_padding = 2 } },
         lualine_b = { 'filename', 'branch' },

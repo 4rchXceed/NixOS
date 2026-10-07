@@ -1,4 +1,6 @@
-vim.keymap.set("n", "<F2>", function()
+
+
+vim.keymap.set("n", "<F4>", function()
     vim.cmd("rightbelow sp term://zsh")
 end)
 
@@ -6,8 +8,20 @@ vim.keymap.set("n", "<CTRL-T>", function()
     vim.cmd("tabnew")
 end)
 
-vim.keymap.set("n", "<CTRL-G>", function()
-    vim.cmd("Gamify")
+vim.keymap.set("n", "<F3>", function()
+    vim.cmd("Triforce profile")
+end)
+
+vim.keymap.set("n", "<CTRL-S>", function()
+    vim.cmd("w")
+end)
+
+vim.keymap.set("n", "<F2>", function()
+    vim.ui.input({ prompt = "New name: " }, function(input)
+        if input then
+            vim.lsp.buf.rename(input)
+        end
+    end)
 end)
 
 require("onedark").setup {
@@ -50,17 +64,19 @@ require("onedark").setup {
 -- }
 
 require 'barbar'.setup {}
-require("gamify").setup()
+require("triforce").setup();
 require("power-mode").setup({
     particles = {
-        preset = "explosion",
-        chars = { "★", "☆", "✡" }, -- Custom chars with explosion physics
-        count = { 10, 15 }, -- More particles
+        count = { 0, 0 },            -- More particles
     },
     combo = {
         shake = false,
     },
+    backspace = {
+        enabled = false,
+    },
 })
+
 local keymap_opts = { buffer = buffer }
 -- Code navigation and shortcuts
 vim.keymap.set("n", "<c-]>", vim.lsp.buf.definition, keymap_opts)
@@ -95,3 +111,13 @@ vim.api.nvim_create_autocmd("BufWinEnter", {
     pattern = "*",
     command = "silent! NERDTreeMirror"
 })
+
+-- Fixes the dos2unix issue with plugins
+vim.api.nvim_create_user_command("FixPlugins", function()
+    io.popen("find ~/.local/share/nvim -type f -print0 | xargs -0 dos2unix --")
+end, {})
+
+vim.api.nvim_create_user_command("FormatRs", function()
+    io.popen("rustfmt")
+    vim.cmd("bufdo e")
+end, {})
