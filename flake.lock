@@ -769,6 +769,26 @@
         "type": "github"
       }
     },
+    "omdrop-owl": {
+      "inputs": {
+        "nixpkgs": [
+          "nixpkgs"
+        ]
+      },
+      "locked": {
+        "lastModified": 1792162085,
+        "narHash": "sha256-kS8uKI9BGbBCJPkdPDauO2QYYgFfo/+/1phuhSF8gyM=",
+        "owner": "t4t5",
+        "repo": "omdrop-owl",
+        "rev": "8213aee9f018ffd78a3fc71863a364fcddd938cd",
+        "type": "github"
+      },
+      "original": {
+        "owner": "t4t5",
+        "repo": "omdrop-owl",
+        "type": "github"
+      }
+    },
     "pre-commit-hooks": {
       "inputs": {
         "flake-compat": "flake-compat",
@@ -802,6 +822,7 @@
         "miku-gtk-theme": "miku-gtk-theme",
         "mikuboot": "mikuboot",
         "nixpkgs": "nixpkgs_5",
+        "omdrop-owl": "omdrop-owl",
         "silentSDDM": "silentSDDM",
         "vpets": "vpets",
         "waybar-module-music": "waybar-module-music"

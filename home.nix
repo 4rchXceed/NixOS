@@ -8,6 +8,15 @@
 let
   dotfiles = "/etc/nixos/dotfiles";
   mkLink = path: config.lib.file.mkOutOfStoreSymlink path;
+  # wineAudio = pkgs.callPackage ./custompkgs/wine-audio { };
+  wineAudio = pkgs.wineWow64Packages.full.overrideAttrs (old: {
+    src = pkgs.fetchFromGitHub {
+      owner = "giang17";
+      repo = "wine";
+      rev = "eb72ef008555348bf114e5da64c0d8868c46f49a";
+      hash = "sha256-Hedf6gZirV6DtsV39gVe/L0oZ93PmFdkLOU61yHVmBE=";
+    };
+  });
 in
 {
   home.stateVersion = "25.11";
@@ -110,6 +119,8 @@ in
       floorp-bin
       nodejs # Required for copilot in nvim
       rustfmt
+      pyright
+      nix-index
     ]
   );
 
@@ -258,6 +269,8 @@ in
   }/lib/wine";
   # Wine64
   home.file."bin/wine64".source = mkLink "/etc/profiles/per-user/archxceed/bin/wine"; # Clearly not the best way, but it'll prob' work
+  # Shortcut to Wine Audio
+  home.file."wine-audio".source = mkLink wineAudio;
   # SDDM Wallpaper (not needed, because as root I use /etc/nixos)
   # home.file."Pictures/wp/miku-video.mp4".source = mkLink "${dotfiles}/private/videos/miku-video.mp4";
   # Unused

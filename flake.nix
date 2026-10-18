@@ -40,6 +40,10 @@
       url = "github:furudbat/wayland-vpets";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+    omdrop-owl = {
+      url = "github:t4t5/omdrop-owl";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
   };
   outputs =
     inputs@{
@@ -53,12 +57,17 @@
       miku-grub-theme,
       cyan-breeze-dark-icons,
       lsfg-vk,
+      omdrop-owl,
       vpets,
       # pake-youtube-music,
       ...
     }:
     let
-
+      omdrop-patched = omdrop-owl.packages.${pkgs.system}.default.overrideAttrs (old: {
+        postInstall = ''
+          ln -s ''${out}/lib/omdrop/omdrop-discoverable ''${out}/bin/omdrop-discoverable
+        '';
+      });
       system = "x86_64-linux";
       pkgs = import nixpkgs { inherit system; };
       # unstable = import nixpkgs-unstable { inherit system; };
@@ -77,6 +86,15 @@
           ./configuration.nix
           mikuboot.nixosModules.default
           vpets.nixosModules.default
+          {
+            imports = [
+              inputs.omdrop-owl.nixosModules.default
+            ];
+
+            environment.systemPackages = [
+              omdrop-patched
+            ];
+          }
           {
             programs.wayland-bongocat = {
               enable = true;

@@ -116,10 +116,16 @@
   # ------------ Added config ---------------
   # Main DE
   programs.hyprland.enable = true;
-  nix.settings.experimental-features = [
-    "nix-command"
-    "flakes"
-  ];
+  nix.settings = {
+    experimental-features = [
+      "nix-command"
+      "flakes"
+    ];
+
+    cores = 0; # Use all cores
+
+    max-jobs = "auto";
+  };
   networking.networkmanager.enable = true;
   #networking.useDHCP = true;
   networking.hostName = "mikumikulovelaptop";
