@@ -1,0 +1,4 @@
+# Ignore for legal reasons (the art was paid, for e.x.) or because it contains sensitive informations.
+# All the private/ refs will be put in the README.md
+private/
+hardware-configuration.nix
