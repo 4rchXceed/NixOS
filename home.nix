@@ -151,6 +151,7 @@ in
     "fastfetch/config.jsonc".source = mkLink "${dotfiles}/fastfetch/config.jsonc";
     # Hyprland
     "hypr/hyprland.conf".source = mkLink "${dotfiles}/hypr/hyprland.conf";
+    "hypr/hyprland.lua".source = mkLink "${dotfiles}/hypr/hyprland.lua";
     "hypr/hyprpaper.conf".source = mkLink "${dotfiles}/hypr/hyprpaper.conf";
     # Waybar
     "waybar/config.jsonc".source = mkLink "${dotfiles}/waybar/config.jsonc";

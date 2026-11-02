@@ -2,3 +2,4 @@
 # All the private/ refs will be put in the README.md
 private/
 hardware-configuration.nix
+nohup.out

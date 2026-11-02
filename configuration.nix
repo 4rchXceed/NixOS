@@ -45,7 +45,7 @@
 
   # Use latest kernel.
   boot.kernelPackages = pkgs.linuxPackages_latest;
-  boot.initrd.systemd.enable = true;
+  # boot.initrd.systemd.enable = true;
   boot.initrd.luks.devices."luks-2b12aa91-cef7-48f6-a764-7d6884d3b9f0".device =
     "/dev/disk/by-uuid/2b12aa91-cef7-48f6-a764-7d6884d3b9f0";
 
@@ -166,6 +166,7 @@
     extraGroups = [
       "networkmanager"
       "wheel"
+      "docker"
     ];
     packages = with pkgs; [
       kdePackages.kate
@@ -213,6 +214,7 @@
     pulseaudio
     linux-wifi-hotspot
     haveged
+    brightnessctl
   ];
   environment.sessionVariables.NIXOS_OZONE_WL = "1";
 
