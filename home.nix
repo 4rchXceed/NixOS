@@ -51,7 +51,8 @@ in
       kdePackages.kate
       nextcloud-client
       nvme-cli
-      brave
+      # brave
+      ungoogled-chromium
       vlc
       nmgui
       zed-editor
@@ -80,7 +81,7 @@ in
       nixd
       libreoffice
       # We use this at school
-      vmware-workstation
+      # vmware-workstation
       # More like "utils"
       winetricks
       wineWow64Packages.stagingFull
@@ -99,16 +100,14 @@ in
       linvstmanager
       # Auto mgr
       playerctl
-      vscode
+      vscodium-fhs
       obs-cmd
       obs-studio-plugins.obs-websocket
-      pkgs.gcr
       kdePackages.kdenlive
-      audacity
       openrgb-with-all-plugins
       qFlipper
       qbittorrent
-      jetbrains.idea-oss
+      jetbrains.idea
       gimp-with-plugins
       moonlight-qt
       hyprshade
@@ -121,12 +120,14 @@ in
       rustfmt
       pyright
       nix-index
+      (pkgs.callPackage ./custompkgs/thirdparty/limusic/package.nix { })
     ]
   );
 
   services.protonmail-bridge.enable = true;
 
   services.dunst.enable = true;
+
   # services.hyprpaper = {
   #   enable = true;
   #   settings = {
@@ -200,6 +201,7 @@ in
     "fastfetch/config.jsonc".source = mkLink "${dotfiles}/fastfetch/config.jsonc";
     # Hyprland
     "hypr/hyprland.conf".source = mkLink "${dotfiles}/hypr/hyprland.conf";
+    "hypr/hyprland.lua".source = mkLink "${dotfiles}/hypr/hyprland.lua";
     "hypr/hyprpaper.conf".source = mkLink "${dotfiles}/hypr/hyprpaper.conf";
     # Waybar
     "waybar/config.jsonc".source = mkLink "${dotfiles}/waybar/config.jsonc";
@@ -217,6 +219,8 @@ in
   xdg.portal = {
     enable = true;
     extraPortals = with pkgs; [
+      # xdg-desktop-portal-hyprland
+      xdg-desktop-portal-gtk
     ];
     config = {
       hyprland = {
@@ -226,6 +230,9 @@ in
         ];
         "org.freedesktop.impl.portal.ScreenCast" = [
           "gnome"
+        ];
+        "org.freedesktop.impl.portal.FileChooser" = [
+          "gtk"
         ];
       };
     };

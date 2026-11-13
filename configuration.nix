@@ -14,7 +14,10 @@
     inputs.silentSDDM.nixosModules.default
     ./custompkgs/musnix
   ];
-
+  services.ollama = {
+      enable = true;
+      package = pkgs.ollama-cuda;
+  };
   services.hardware.openrgb = {
     enable = true;
     package = pkgs.openrgb-with-all-plugins;
@@ -76,7 +79,7 @@
     "usb_storage"
     "sd_mod"
   ];
-  boot.initrd.systemd.enable = true;
+  # boot.initrd.systemd.enable = true;
   boot.supportedFilesystems = [ "ntfs" ];
 
   services.flatpak.enable = true;
@@ -201,6 +204,7 @@
     gdk-pixbuf
     glib
     gobject-introspection
+    dbus
   ];
 
   services.usbmuxd.enable = true;
@@ -277,7 +281,6 @@
     gst_all_1.gst-plugins-bad
     gst_all_1.gst-plugins-ugly
     gst_all_1.gst-libav
-    gst_all_1.gst-vaapi
   ];
   environment.sessionVariables.NIXOS_OZONE_WL = "1";
   environment.variables = {
@@ -302,12 +305,14 @@
   };
   virtualisation.docker.enable = true;
   virtualisation.docker.enableOnBoot = true;
-  virtualisation.vmware.host.enable = true;
+  # virtualisation.vmware.host.enable = true;
   # Open ports in the firewall.
   networking.firewall.allowedTCPPorts = [
     22
     24444
     25565
+    8000
+    8080
   ];
   # networking.firewall.allowedUDPPorts = [ ... ];
   # Or disable the firewall altogether.

@@ -63,11 +63,6 @@
       ...
     }:
     let
-      omdrop-patched = omdrop-owl.packages.${pkgs.system}.default.overrideAttrs (old: {
-        postInstall = ''
-          ln -s ''${out}/lib/omdrop/omdrop-discoverable ''${out}/bin/omdrop-discoverable
-        '';
-      });
       system = "x86_64-linux";
       pkgs = import nixpkgs { inherit system; };
       # unstable = import nixpkgs-unstable { inherit system; };
@@ -91,9 +86,9 @@
               inputs.omdrop-owl.nixosModules.default
             ];
 
-            environment.systemPackages = [
-              omdrop-patched
-            ];
+            # environment.systemPackages = [
+            #   omdrop-patched
+            # ];
           }
           {
             programs.wayland-bongocat = {
@@ -157,6 +152,7 @@
                 portalPackage =
                   inputs.hyprland.packages.${pkgs.stdenv.hostPlatform.system}.xdg-desktop-portal-hyprland;
               };
+
               xdg.configFile."fontconfig/conf.d/10-hm-fonts.conf".force = true;
               gtk = {
                 enable = true;
