@@ -83,6 +83,7 @@ in
       kdePackages.filelight
       nix-index
       nodejs
+      (pkgs.callPackage ./custompkgs/limusic/package.nix { })
     ]
   );
 

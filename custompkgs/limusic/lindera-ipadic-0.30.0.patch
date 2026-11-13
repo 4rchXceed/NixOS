@@ -1,0 +1,22 @@
+diff --git a/build.rs b/build.rs
+index 8adff58..e3f47de 100755
+--- a/build.rs
++++ b/build.rs
+@@ -54,8 +54,16 @@ fn main() -> Result<(), Box<dyn Error>> {
+         let mut dummy_matrix_def = File::create(input_dir.join("matrix.def"))?;
+         dummy_matrix_def.write_all(b"0 1 0\n")?;
+     } else {
++        // PATCH: NIXOS ENV VAR
++        let custom_input_file = env::var_os("LINDERA_IPADIC_INPUT_FILE");
++
+         // Source file path for build package
+-        let source_path_for_build = Path::new(&build_dir).join(file_name);
++        // https://github.com/lindera-morphology/mecab-ipadic/archive/refs/tags/2.7.0-20070801.tar.gz
++        let source_path_for_build = if let Some(custom_input_file) = custom_input_file {
++            Path::new(&custom_input_file).to_path_buf()
++        } else {
++            Path::new(&build_dir).join(file_name)
++        };
+ 
+         // Download source file to build directory
+         if !source_path_for_build.exists() {
