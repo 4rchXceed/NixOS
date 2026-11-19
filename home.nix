@@ -84,6 +84,7 @@ in
       nix-index
       nodejs
       (pkgs.callPackage ./custompkgs/limusic/package.nix { })
+      (pkgs.callPackage ./custompkgs/sonos-linux/package.nix { })
     ]
   );
 

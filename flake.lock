@@ -214,6 +214,26 @@
         "type": "github"
       }
     },
+    "gputaskmgr": {
+      "inputs": {
+        "nixpkgs": [
+          "nixpkgs"
+        ]
+      },
+      "locked": {
+        "lastModified": 1794804111,
+        "narHash": "sha256-+SYkeNAFde6peBgU5kXnDV/l5l9TOJ5WpjXioTcVpkQ=",
+        "owner": "shanselman",
+        "repo": "gputaskman",
+        "rev": "753088046cb78ba2686249d8231c6649e4bd27be",
+        "type": "github"
+      },
+      "original": {
+        "owner": "shanselman",
+        "repo": "gputaskman",
+        "type": "github"
+      }
+    },
     "home-manager": {
       "inputs": {
         "nixpkgs": [
@@ -550,26 +570,6 @@
         "type": "github"
       }
     },
-    "limusic": {
-      "inputs": {
-        "nixpkgs": [
-          "nixpkgs"
-        ]
-      },
-      "locked": {
-        "lastModified": 1792415200,
-        "narHash": "sha256-FCOAnLwPCwFf93QjL6I8otGI84UjQz8pq9G7pOhIk7E=",
-        "owner": "davidvanderklay",
-        "repo": "limusic-nix",
-        "rev": "0e6485dd434455ec29d39b7e0576f8f705e84147",
-        "type": "github"
-      },
-      "original": {
-        "owner": "davidvanderklay",
-        "repo": "limusic-nix",
-        "type": "github"
-      }
-    },
     "miku-grub-theme": {
       "inputs": {
         "nixpkgs": "nixpkgs_4",
@@ -832,9 +832,9 @@
         "csakura": "csakura",
         "cyan-breeze-dark-icons": "cyan-breeze-dark-icons",
         "flake-utils": "flake-utils",
+        "gputaskmgr": "gputaskmgr",
         "home-manager": "home-manager",
         "hyprland": "hyprland",
-        "limusic": "limusic",
         "miku-grub-theme": "miku-grub-theme",
         "miku-gtk-theme": "miku-gtk-theme",
         "mikuboot": "mikuboot",

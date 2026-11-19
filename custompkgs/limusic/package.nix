@@ -99,6 +99,7 @@ rustPlatform.buildRustPackage (finalAttrs: {
     pkg-config
     glib-networking
     webkitgtk_4_1
+    sqlite
   ];
 
   pname = "limusic";

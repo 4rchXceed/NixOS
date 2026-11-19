@@ -43,8 +43,8 @@
       inputs.flake-utils.follows = "flake-utils";
     };
 
-    limusic = {
-      url = "github:davidvanderklay/limusic-nix";
+    gputaskmgr = {
+      url = "github:shanselman/gputaskman";
       inputs.nixpkgs.follows = "nixpkgs";
     };
   };
@@ -62,6 +62,7 @@
       nix-gaming,
       csakura,
       nix-photogimp3,
+      gputaskmgr,
       ...
     }:
     let
@@ -123,7 +124,7 @@
                 nix-gaming.packages.${pkgs.stdenv.hostPlatform.system}.osu-lazer-bin
                 nix-gaming.packages.${pkgs.stdenv.hostPlatform.system}.osu-stable
                 inputs.nix-photogimp3.packages.${pkgs.system}.default
-                inputs.limusic.packages.${pkgs.system}.limusic
+                gputaskmgr.packages.${pkgs.stdenv.hostPlatform.system}.gputaskman
               ];
             }
           )

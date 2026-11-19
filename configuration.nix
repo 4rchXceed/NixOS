@@ -215,6 +215,11 @@
     linux-wifi-hotspot
     haveged
     brightnessctl
+    ffmpeg
+    python3
+    python3Packages.pygobject3
+    python3Packages.gst-python
+    gtk3
   ];
   environment.sessionVariables.NIXOS_OZONE_WL = "1";
 
